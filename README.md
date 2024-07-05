@@ -1,0 +1,2 @@
+# Monitoring-Inland-Surface-Water-Area-using-Google-Earth-Engine-Python
+In this project, we’ll explore the process of developing a powerful tool to monitor inland surface water areas using the Google Earth Engine (GEE) platform and Python. By leveraging geospatial data and advanced analysis techniques, we’ll unlock insights into water dynamics, contributing to environmental research and sustainable resource management.
