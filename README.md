@@ -9,7 +9,7 @@ This project utilizes Google Earth Engine (GEE) and Python to monitor the Barrag
 Barrage Massira, also known as the Massira Dam, is a large dam located on the Oum Er-Rbia River in Morocco. It is a crucial water reservoir for agricultural irrigation, drinking water supply, and hydroelectric power generation. The dam's construction began in 1979 and it has since become a vital resource for the region.
 
 
-<img src="massirabarrage.jpg" alt="Image" width="250" align="right">
+<img src="massirabarrage.jpg" alt="Image" width="500" align="right">
 
 ### Objective
 
