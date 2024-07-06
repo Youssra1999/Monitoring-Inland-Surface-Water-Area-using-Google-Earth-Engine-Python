@@ -8,6 +8,8 @@ This project utilizes Google Earth Engine (GEE) and Python to monitor the Barrag
 
 Barrage Massira, also known as the Massira Dam, is a large dam located on the Oum Er-Rbia River in Morocco. It is a crucial water reservoir for agricultural irrigation, drinking water supply, and hydroelectric power generation. The dam's construction began in 1979 and it has since become a vital resource for the region.
 
+![Barrage Massira](massirabarrage.jpg)
+
 ### Objective
 
 The main objective of this project is to monitor the changes in water levels at Barrage Massira using satellite imagery and remote sensing techniques provided by Google Earth Engine. The project aims to visualize these changes over time and provide meaningful insights.
@@ -17,13 +19,7 @@ The main objective of this project is to monitor the changes in water levels at 
 Before running the notebook, ensure you have the following prerequisites:
 
 1. **Google Earth Engine Account**: Sign up for a Google Earth Engine account [here](https://earthengine.google.com/signup/).
-2. **Python Libraries**: Install the required Python libraries using the following commands:
-
-    ```bash
-    pip install geemap
-    pip install matplotlib
-    pip install pandas
-    ```
+2. **Python Libraries**: Install the required Python libraries.
 
 ## Project Structure
 
@@ -32,73 +28,26 @@ Before running the notebook, ensure you have the following prerequisites:
 - **Visualization**: Generate visualizations to understand the changes in water levels over time.
 - **GIF Creation**: Create an animated GIF to show the temporal changes in Barrage Massira.
 - **Add Text to GIF**: Annotate the GIF with relevant text information, such as year labels.
+- **Volume Estimation**: Estimate the volume of the lake using bathymetric data and visualize the lake topography.
 
 ## How to Run the Notebook
 
 1. **Authentication and Initialization**: Authenticate and initialize the Google Earth Engine API.
-
-    ```python
-    import geemap
-    import ee
-    import matplotlib.pyplot as plt
-    import pandas as pd
-    import subprocess
-
-    ee.Authenticate()
-    ee.Initialize(project='monitoring-inland-water')
-    ```
-
 2. **Define Geometry and Image Collection**: Define the geographical region and image collection.
-
-    ```python
-    geometry = ee.Geometry.Rectangle([-180, -90, 180, 90])
-    image_collection = ee.ImageCollection('LANDSAT/LC08/C01/T1_32DAY_NDWI')
-    areaImages = image_collection.map(lambda image: image.updateMask(image.select('waterclass').gt(0)))
-    ```
-
 3. **Filter and Visualize Images**: Filter images with zero area and set visualization parameters.
-
-    ```python
-    image_collection = areaImages.filter(ee.Filter.gt('area_km2', 0))
-    visParams = {
-        'bands': ['waterclass'],
-        'palette': ['blue']
-    }
-    images = image_collection.map(lambda image: image.visualize(min=0, max=1, palette=['black', 'blue']).selfMask())
-    ```
-
 4. **Create and Download GIF**: Define GIF parameters, create the GIF, and download it.
-
-    ```python
-    gifParams = {
-        'region': geometry,
-        'dimensions': 600,
-        'framesPerSecond': 1
-    }
-    url = images.getVideoThumbURL(gifParams)
-    subprocess.run(["wget", url, "-O", "surface_water.gif"])
-    ```
-
 5. **Add Text to GIF**: Create a sequence of text for each year and add it to the GIF.
+6. **Volume Estimation**: Estimate the volume of the lake using bathymetric data.
+7. **Visualize Lake Topography**: Generate a 3D plot to visualize the lake topography.
 
-    ```python
-    # Assuming 'df' is a DataFrame with a 'year' column
-    df = pd.DataFrame({'year': range(2000, 2020)})  # Example DataFrame, replace with your actual data
+## References
 
-    text_sequence = [f"Year: {year}" for year in df.year]
-    new_file_name = "new_surface_water.gif"
+1. [Calculating areas in Google Earth Engine](https://developers.google.com/earth-engine/guides/reducers_array)
+2. [Module 2: Calculating the surface water mapping](https://developers.google.com/earth-engine/tutorials/community/intro-to-python-api#calculating-surface-water-mapping)
+3. Khazaei, Behnaz; Read, Laura K; Casati, Matteo; Sampson, Kevin M; Yates, David N (2022): GLOBathy Bathymetry Rasters. figshare. Dataset. [https://doi.org/10.6084/m9.figshare.13402465.v1](https://doi.org/10.6084/m9.figshare.13402465.v1)
+4. [Colorscales in Plotly](https://plotly.com/python/colorscales/)
+5. [Constructing custom colorscales on Plotly](https://plotly.com/python/builtin-colorscales/)
 
-    geemap.add_text_to_gif(
-        "surface_water.gif",
-        new_file_name,
-        xy=("3%", "5%"),
-        text_sequence=text_sequence,
-        font_size=30,
-        font_color="#ffffff",
-        duration=1000  # in milliseconds
-    )
-    ```
+---
 
-## Conclusion
-
-This project provides a comprehensive approach to monitoring water levels at Barrage Massira using advanced remote sensing and data processing techniques. By leveraging the power of Google Earth Engine and Python, significant insights can be gained into the temporal changes occurring in this critical water resource.
+This README file provides an overview of the project, prerequisites, structure, and references, guiding users through the process of running the notebook and understanding the project's objectives and outcomes.
