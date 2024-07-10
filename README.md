@@ -51,6 +51,3 @@ Before running the notebook, ensure you have the following prerequisites:
 4. [Colorscales in Plotly](https://plotly.com/python/colorscales/)
 5. [Constructing custom colorscales on Plotly](https://plotly.com/python/builtin-colorscales/)
 
----
-
-This README file provides an overview of the project, prerequisites, structure, and references, guiding users through the process of running the notebook and understanding the project's objectives and outcomes.
